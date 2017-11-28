@@ -1,0 +1,24 @@
+{
+  "name": "myboke",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yhn",
+  "license": "ISC",
+  "devDependencies": {
+    "ejs": "^2.5.7",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-mysql-session": "^0.0.2",
+    "koa-router": "^7.3.0",
+    "koa-session-minimal": "^3.0.4",
+    "koa-static": "^4.0.2",
+    "koa-views": "^6.1.2",
+    "md5": "^2.2.1",
+    "moment": "^2.19.2",
+    "mysql": "^2.15.0"
+  }
+}
