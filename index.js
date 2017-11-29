@@ -38,9 +38,12 @@ console.log(__dirname);
 console.log(path.join(__dirname,'./static'));
 console.log(path.resolve(__dirname,'./static'));
 //配置静态资源加载 中间件
-// app.use(koaStatic(
-//     path.join(__dirname,'./static')
-// ));
+app.use(koaStatic(
+    path.join(__dirname,'./static')
+));
+
+//app.use(express.static('static'));
+
 
 // //配置服务模板渲染引擎中间件
 // app.use(views(
