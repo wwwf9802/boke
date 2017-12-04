@@ -169,6 +169,74 @@ router.post('/yhntest/delPerson',async(ctx, next) => {
 });
 
 
+router.post('/yhntest/getplaylistsongs', async (ctx, next) => {
+    if (listId = ctx.request.body.listId) {
+        console.log(ctx.request.body.listId);
+        let listId = ctx.request.body.listId;
+        let listData = await sqlfuns.getlist(listId).then(result => {
+            let jsonData = JSON.stringify(result);
+            return JSON.parse(jsonData);
+        }).catch(err => {
+            let data = {
+                status: false,
+                info: "查询失败",
+            }
+            ctx.body = data;
+        });
+
+        if (listData.length) {
+            var arr=await sqlfuns.getlistSongs(listId)
+                .then(result => {
+                    let jsonData = JSON.stringify(result);
+                    return JSON.parse(jsonData);
+                }).catch(err => {
+                })
+            let backData=listData[0];
+            backData.songs=arr;
+            ctx.body={
+                status:true,
+                data:backData
+            }
+        }else{
+            let data = {
+                status: false,
+                info: "查询失败",
+            }
+            ctx.body = data;
+        }
+
+
+        
+
+
+
+
+        // await sqlfuns.getlistSongs(listId)
+        //     .then(result => {
+        //         console.log(result);
+        //         let jsonData=JSON.stringify(result);
+        //         ctx.body = JSON.parse(jsonData);
+        //     }).catch(err => {
+        //         let data = {
+        //             status: false,
+        //             info: "查询失败",
+        //         }
+        //         ctx.body = data;
+        //     })
+    } else {
+        let data = {
+            status: false,
+            info: "请求参数有误",
+        }
+        ctx.body = data;
+    }
+
+    //await sqlfuns.findPerson(ctx.request.body.name)
+});
+
+
+
+
 
 
 // router.get('/home', async(ctx, next) => {
