@@ -107,7 +107,9 @@ router.get('/yhntest/findAll',async(ctx, next) => {
 
 router.post('/yhntest/insertPerson',async(ctx, next) => {
     console.log(ctx.request.body);
-
+    if(check.guoqi(ctx)){
+        return
+    }
     if(ctx.request.body.name&&ctx.request.body.age&&ctx.request.body.sex){
         
         let arr=[ctx.request.body.name,ctx.request.body.age,ctx.request.body.sex];
@@ -136,7 +138,9 @@ router.post('/yhntest/insertPerson',async(ctx, next) => {
 
 
 router.post('/yhntest/delPerson',async(ctx, next) => {
-    
+    if(check.guoqi(ctx)){
+        return
+    }
     console.log(ctx.request.body);
     if(ctx.request.body.id){
         let id=ctx.request.body.id;
@@ -169,7 +173,11 @@ router.post('/yhntest/delPerson',async(ctx, next) => {
 });
 
 
+
 router.post('/yhntest/getplaylistsongs', async (ctx, next) => {
+    if(check.guoqi(ctx)){
+        return
+    }
     if (listId = ctx.request.body.listId) {
         console.log(ctx.request.body.listId);
         let listId = ctx.request.body.listId;
@@ -190,6 +198,7 @@ router.post('/yhntest/getplaylistsongs', async (ctx, next) => {
                     let jsonData = JSON.stringify(result);
                     return JSON.parse(jsonData);
                 }).catch(err => {
+
                 })
             let backData=listData[0];
             backData.songs=arr;
@@ -205,24 +214,6 @@ router.post('/yhntest/getplaylistsongs', async (ctx, next) => {
             ctx.body = data;
         }
 
-
-        
-
-
-
-
-        // await sqlfuns.getlistSongs(listId)
-        //     .then(result => {
-        //         console.log(result);
-        //         let jsonData=JSON.stringify(result);
-        //         ctx.body = JSON.parse(jsonData);
-        //     }).catch(err => {
-        //         let data = {
-        //             status: false,
-        //             info: "查询失败",
-        //         }
-        //         ctx.body = data;
-        //     })
     } else {
         let data = {
             status: false,
@@ -236,7 +227,13 @@ router.post('/yhntest/getplaylistsongs', async (ctx, next) => {
 
 
 
-
+router.get('/yhntest/xml',async(ctx, next) => {
+    console.log(ctx.request.body);
+    let xmlStr = '<?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"><soapenv:Header><in:sysHeader xmlns:in="http://www.szgas.com/common/header/in"><in:msgId/><in:msgDate/><in:msgTime/><in:servCd/><in:sysCd>040</in:sysCd><in:bizId/><in:bizType>02</in:bizType><in:orgCd/><in:resCd/><in:resText/><in:bizResCd>0</in:bizResCd><in:bizResText>成功</in:bizResText><in:ver/></in:sysHeader></soapenv:Header><soapenv:Body><ns:receiveBandingAcctIdListResponse xmlns:ns="http://www.szgas.com/service/bd"><ns:return>{"cusInfoList":[{"acctId":"4169130000","address":"星座大厦11BE","cusName":"张鳌","phone":"15889763830"},{"acctId":"6669530000","address":"红树家邻观海轩3G","cusName":"孙海利","phone":"null"},{"acctId":"5002140000","address":"红树福苑5栋B单元2301","cusName":"中国证券监督管理委员会深圳监管局","phone":"18682122197"},{"acctId":"7502740000","address":"市政工程公司10栋302","cusName":"秦致均","phone":"13530719169"}],"status":"Y"}</ns:return></ns:receiveBandingAcctIdListResponse></soapenv:Body></soapenv:Envelope>';
+    ctx.body=xmlStr;
+    //var name=ctx.cookies.get('name',{});
+   //await sqlfuns.findPerson(ctx.request.body.name)
+});
 
 
 // router.get('/home', async(ctx, next) => {

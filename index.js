@@ -1,9 +1,9 @@
 var Koa=require('koa');
 var path=require('path');
 var bodyPaser=require('koa-bodyparser');
-var ejs=require('ejs');
+//var ejs=require('ejs');
 var session=require('koa-session-minimal');
-var mySqlStore=require('koa-mysql-session');
+//var mySqlStore=require('koa-mysql-session');
 var config=require('./config');
 var router=require('koa-router');
 var views=require('koa-views');
@@ -74,6 +74,6 @@ app.use(async(ctx, next) => {
 app.use(require('./routes/test.js').routes());
 
 app.listen(5555,function(){
-    console.log("success");
+    console.log("port 5555 success");
 });
 
